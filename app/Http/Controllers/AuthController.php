@@ -6,6 +6,7 @@ use App\Http\Requests\StoreUserInfo;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\ForgotPasswordRequest;
 use App\Http\Requests\ResetPasswordRequest;
+use App\Http\Requests\UpdatePasswordRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -94,5 +95,22 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'Failed to reset password.',
         ], 500);
+    }
+    public function updatePassword(UpdatePasswordRequest $request)
+    {
+        $user = auth()->user();
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return response()->json([
+                'message' => 'Current password is incorrect.',
+            ], 400);
+        }
+
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return response()->json([
+            'message' => 'Password updated successfully.',
+        ]);
     }
 }
