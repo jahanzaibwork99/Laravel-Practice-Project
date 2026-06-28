@@ -21,7 +21,7 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password, 
-            // NOTE: Model mein 'password' => 'hashed' set hai, so auto hash ho jayega
+            // NOTE: In model Hashed is already set
         ]);
 
         return response()->json([
