@@ -45,10 +45,11 @@ class UpdateEmployeeRequest extends FormRequest
                 'string',
             ],
 
-            'department' => [
-                'sometimes',
-                'string',
-            ],
+            'department_id' => [
+    'sometimes',
+    'integer',
+    'exists:departments,id',
+],
 
             'designation' => [
                 'sometimes',

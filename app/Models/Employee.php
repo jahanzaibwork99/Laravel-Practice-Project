@@ -11,10 +11,15 @@ class Employee extends Model
         'name',
         'email',
         'phone',
-        'department',
+        'department_id',
         'designation',
         'salary',
         'joining_date',
         'status',
     ];
+    public function department()
+{
+    return $this->belongsTo(Department::class);
 }
+}
+
